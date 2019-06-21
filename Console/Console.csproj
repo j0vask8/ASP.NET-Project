@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\EfDataAccess\EfDataAccess.csproj" />
+    <ProjectReference Include="..\EfDataCommands\EfDataCommands.csproj" />
+  </ItemGroup>
+
+</Project>

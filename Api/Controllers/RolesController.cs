@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,24 +76,11 @@ namespace Api.Controllers
                 return NotFound(e.Message);
                 //return StatusCode(500, "An error occured");
             }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occured");
+            }
         }
         
-        // POST: api/Roles
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
-        
-        // PUT: api/Roles/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-        
-        // DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

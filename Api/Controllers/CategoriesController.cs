@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
@@ -171,6 +171,14 @@ namespace Api.Controllers
             {
                 _deleteCommand.Execute(id);
                 return NoContent();
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (EntityDeleted)
+            {
+                return StatusCode(410, "The Category is already Deleted");
             }
             catch (Exception)
             {

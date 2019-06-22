@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -105,6 +105,10 @@ namespace Api.Controllers
                 _addCommand.Execute(dto);
                 return NoContent();
             }
+            catch(EntityNotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception)
             {
                 return StatusCode(500, "An error ocurred");
@@ -163,10 +167,14 @@ namespace Api.Controllers
                 _deleteCommand.Execute(id);
                 return NoContent();
             }
+            catch (EntityDeleted)
+            {
+                return StatusCode(410, "The Comment is already Deleted");
+            }
             catch (Exception)
             {
                 return StatusCode(500, "An error occured");
             }
-        }
+        } //abcd
     }
 }

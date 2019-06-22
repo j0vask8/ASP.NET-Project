@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands;
 using Application.DTO;
+using Application.Exceptions;
 using Application.Searches;
 using EfDataAccess;
 using Microsoft.AspNetCore.Http;
@@ -69,6 +70,10 @@ namespace Api.Controllers
                 var topic = _getOneCommand.Execute(id);
                 return Ok(topic);
             }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception)
             {
                 return StatusCode(500, "An Error has occured.");
@@ -100,6 +105,10 @@ namespace Api.Controllers
                 _addCommand.Execute(dto);
                 return NoContent();
             }
+            catch (EntityAlreadyExistsException)
+            {
+                return NotFound();
+            }
             catch (Exception)
             {
                 return StatusCode(500, "An error ocurred");
@@ -114,6 +123,10 @@ namespace Api.Controllers
             {
                 _updateCommand.Execute(dto);
                 return NoContent();
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception)
             {
@@ -141,6 +154,14 @@ namespace Api.Controllers
             {
                 _deleteCommand.Execute(id);
                 return NoContent();
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (EntityDeleted)
+            {
+                return StatusCode(410, "The Topic is already Deleted");
             }
             catch (Exception)
             {

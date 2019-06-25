@@ -18,7 +18,7 @@ namespace EfDataCommands
 
         public void Execute(CreateTopicDto request)
         {
-            if(Context.Topics.Any(t => t.Subject == t.Subject))
+            if(Context.Topics.Any(t => t.Subject == request.Subject))
             {
                 throw new EntityAlreadyExistsException();
             }
